@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>OpenPGP</title>
+    <script src="openpgp.min.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <div>
+        <label for="pubkey">Public Key</label>
+    </div>
+    <textarea cols="80" rows="10" id="pubkey"></textarea>
+    <button id="check">Check</button>
+    <div id="failure" style="display: none"></div>
+    <div id="success" style="display: none">Success!</div>
+</body>
+
+</html>
