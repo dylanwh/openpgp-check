@@ -1,9 +1,9 @@
 function readPublicKeys(pubkey) {
-    var result = openpgp.key.readArmored(pubkey.trim());
-    if (result.err) {
-        throw new Error(result.err.toString());
-    }
-    return result.keys;
+  var result = openpgp.key.readArmored(pubkey.trim());
+  if (result.err) {
+    throw result.err;
+  }
+  return result.keys;
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   };
   var onFailure = function (err) {
     success.style.display = 'none';
-    failure.innerText = "Failure: " + err.toString();
+    failure.innerText = err.toString();
     failure.style.display = '';
     output.innerText = "";
   };
