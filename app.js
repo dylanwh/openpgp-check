@@ -12,21 +12,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var failure = document.getElementById('failure');
     var success = document.getElementById('success');
     var check = document.getElementById('check');
+    var onSuccess = function (result) {
+      success.style.display = '';
+      failure.style.display = 'none';
+      output.innerText = result.data;
+    };
+    var onFailure = function (err) {
+      success.style.display = 'none';
+      failure.innerText = "Failure: " + err.toString();
+      failure.style.display = '';
+      output.innerText = "";
+    };
     failure.style.color = 'red';
     success.style.color = 'green';
-    check.addEventListener('click', function (event) {
-        openpgp.encrypt({
-            publicKeys: readPublicKeys(pubkey.value),
-            data: "Hello, world!"
-        }).then(function (result) {
-            success.style.display = '';
-            failure.style.display = 'none';
-            output.innerText = result.data;
-        }).catch(function (err) {
-            success.style.display = 'none';
-            failure.innerText = "Failure: " + err.toString();
-            failure.style.display = '';
-            output.innerText = "";
-        });
-    })
+    try {
+      check.addEventListener('click', function (event) {
+          openpgp.encrypt({
+              publicKeys: readPublicKeys(pubkey.value),
+              data: "Hello, world!"
+          }).then(onSuccess).catch(onFailure);
+      })
+    } catch (e) {
+      onFailure(e);
+    }
 });
