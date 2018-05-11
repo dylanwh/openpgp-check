@@ -29,8 +29,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     try {
       openpgp.encrypt({
         publicKeys: readPublicKeys(pubkey.value),
-        data: "Hello, world!",
-        wildcard: true
+        data: "Hello, world!"
       }).then(onSuccess).catch(onFailure);
     } catch (e) {
       onFailure(e);
